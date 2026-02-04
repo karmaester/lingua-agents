@@ -1,0 +1,188 @@
+@import "tailwindcss";
+
+/* ──────────────────────────────────────────────
+   Design Tokens — LinguaAgents Visual System
+   ────────────────────────────────────────────── */
+
+:root {
+  /* Typography — geometric heading + readable body */
+  --font-heading: "Avenir Next", "Avenir", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-body: "Inter", "SF Pro Text", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  /* Surfaces */
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --surface-primary: #ffffff;
+  --surface-secondary: #f8fafc;
+  --surface-elevated: #ffffff;
+
+  /* Text */
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --text-tertiary: #94a3b8;
+  --text-inverse: #ffffff;
+
+  /* Interactive */
+  --interactive-primary: #4f46e5;
+  --interactive-hover: #4338ca;
+  --interactive-muted: #eef2ff;
+
+  /* Module accent colors */
+  --module-conversation: #3b82f6;
+  --module-lesson: #10b981;
+  --module-exercise: #f97316;
+  --module-vocabulary: #14b8a6;
+  --module-culture: #f43f5e;
+  --module-assessment: #8b5cf6;
+
+  /* Gamification */
+  --xp-color: #f59e0b;
+  --streak-color: #f97316;
+  --achievement-color: #fbbf24;
+  --mastery-color: #10b981;
+
+  /* Radius scale */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  --shadow-glow: 0 0 20px rgba(79, 70, 229, 0.15);
+}
+
+/* ──────────────────────────────────────────────
+   Dark Mode Overrides
+   ────────────────────────────────────────────── */
+
+.dark {
+  --background: #0f172a;
+  --foreground: #f1f5f9;
+  --surface-primary: #1e293b;
+  --surface-secondary: #0f172a;
+  --surface-elevated: #1e293b;
+
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-tertiary: #64748b;
+  --text-inverse: #0f172a;
+
+  --interactive-primary: #818cf8;
+  --interactive-hover: #6366f1;
+  --interactive-muted: #1e1b4b;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.2);
+  --shadow-glow: 0 0 20px rgba(129, 140, 248, 0.2);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+/* ──────────────────────────────────────────────
+   Custom scrollbar
+   ────────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* ──────────────────────────────────────────────
+   Page transitions
+   ────────────────────────────────────────────── */
+
+main {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ──────────────────────────────────────────────
+   Reduced motion support
+   ────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Manual reduced motion toggle from Settings */
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* ──────────────────────────────────────────────
+   Interactive element press feedback
+   ────────────────────────────────────────────── */
+
+button:active:not(:disabled),
+a:active {
+  transform: scale(0.98);
+}
+
+/* ──────────────────────────────────────────────
+   Focus ring standardization
+   ────────────────────────────────────────────── */
+
+:focus-visible {
+  outline: 2px solid var(--interactive-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
